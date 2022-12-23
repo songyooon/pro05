@@ -1,0 +1,5 @@
+package com.shop.myapp.repository;
+
+public interface BoardRepository {
+
+}

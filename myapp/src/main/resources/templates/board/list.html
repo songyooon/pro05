@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>게시판 글 목록</title>
+	<th:block th:insert="fragments/common/head"></th:block>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="fragments/common/hd"></th:block>
+	<div class="container">
+		<h2 class="title">게시판 글 목록</h2>
+		<table class="table">
+			<thead>
+				<th>번호</th>
+				<th>글 제목</th>
+				<th>작성일</th>
+			</thead>
+			<tbody>
+				<tr th:each="board : ${boardList}">
+					<td th:text="${board.id}"></td>
+					<td><a th:href="@{/board/detail(id=${board.id})}" th:text="${board.title}"></a></td>
+					<td th:text="${board.writer}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/board/write}" class="btn btn-primary waves-effect waves-light">Write</a>
+	</div>
+	<th:block th:insert="fragments/common/ft"></th:block>
+</div>	
+</body>
+</html>

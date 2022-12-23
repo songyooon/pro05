@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>게시판 글 상세보기</title>
+	<th:block th:insert="fragments/common/head"></th:block>
+</head>
+<body>
+<div class="fluid-container">
+	<th:block th:insert="fragments/common/hd"></th:block>
+	<div class="container">
+	    <h2 class="title">글 상세보기</h2>
+	    <ul th:object="${board}">
+	    	<li th:text="*{id}"></li>
+	    	<li th:text="*{title}"></li>
+	    	<li th:text="*{content}"></li>
+	    </ul>
+	    <a th:href="@{/board/list}" class="btn btn-default waves-effect waves-light">글 목록</a>
+	    <a th:href="@{/board/update(id=${board.id})}" class="btn btn-primary">글 수정</a>
+	</div>
+	<th:block th:insert="fragments/common/ft"></th:block>
+</div>
+</body>
+</html>

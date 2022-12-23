@@ -1,0 +1,44 @@
+package com.shop.myapp.model;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.shop.myapp.dto.BoardRequestDto;
+import com.shop.myapp.dto.BoardResponseDto;
+import com.shop.myapp.entity.Board;
+import com.shop.myapp.repository.BoardRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class BoardService {
+
+	private final BoardRepository boardRepository;
+	
+	//글 등록
+	@Transactional
+	public Long save(final BoardRequestDto params) {
+		Board entity = boardRepository.save(params.toEntity());
+		return entity.getId();
+	}
+	
+	//글 목록 
+	public List<BoardResponseDto> findAll() {
+			Sort sort = Sort.by(Direction.DESC, "id", "createdDate");
+			List<Board> list = boardRepository.findAll();
+			return list.stream().map(BoardResponseDto::new).collect(Collectors.toList());
+	}
+	
+	//글 수정
+	public Long update(final Long id, BoardRequestDto params) {
+		Board entity = boardRepository.findById(id).orElseThrow();
+		entity.update(params.getTitle(), params.getContent(), params.getWriter());
+		return id;
+	}
+}

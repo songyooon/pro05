@@ -1,0 +1,5 @@
+package com.shop.myapp.exception;
+
+public class ErrorResponse {
+
+}
